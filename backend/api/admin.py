@@ -1,27 +1,84 @@
 from django.contrib import admin
 
-from .models import Cart, Favorite, Ingredient, Recipe, Tag
+from api.models import (FavoriteList, Ingredient,
+                            IngredientInRecipe, Recipe,
+                            ShoppingCart, Subscription, Tag)
 
+class IngredientInRecipeInline(admin.TabularInline):
+    model = IngredientInRecipe
+    extra = 1
 
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'color')
+class IngredientInRecipeAdmin(admin.ModelAdmin):
+    list_display = (
+        'recipe',
+        'ingredient',
+        'amount'
+    )
+    list_display_links = ('recipe',)
+    search_fields = ('recipe__name', 'ingredient__name')
 
 
 class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'measurement_unit')
-    list_filter = ('name',)
+    list_display = ('id', 'name', 'measurement_unit')
+    search_fields = ('name__istartswith', 'name__contains')
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super(
+            IngredientAdmin, self
+        ).get_search_results(request, queryset, search_term)
+        queryset1 = queryset.filter(name__istartswith=search_term)
+        queryset2 = queryset.filter(name__contains=search_term)
+        queryset = queryset1.union(queryset2, all=True)
+        return queryset, use_distinct
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'author', 'count_favorites')
-    list_filter = ('author', 'name', 'tags')
+    inlines = (IngredientInRecipeInline,)
+    list_display = ('author', 'name', 'count_favorite')
+    list_filter = ('author', 'tags')
+    search_fields = ('name', 'author__username')
 
-    def count_favorites(self, obj):
-        return obj.favorites.count()
+    def count_favorite(self, obj):
+        return FavoriteList.objects.filter(recipe=obj).count()
 
 
-admin.site.register(Tag, TagAdmin)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color')
+    list_editable = ('color',)
+    prepopulated_fields = {'slug': ('name', )}
+    search_fields = ('name',)
+
+
+class FavoriteListAdmin(admin.ModelAdmin):
+    list_display = ('user', 'recipe')
+    search_fields = (
+        'user__username',
+        'user__email',
+        'recipe__name'
+    )
+
+
+class ShoppingCartAdmin(admin.ModelAdmin):
+    list_display = ('user', 'recipe')
+    search_fields = (
+        'user__username',
+        'user__email',
+        'recipe__name'
+    )
+
+
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'author')
+    search_fields = (
+        'user__username',
+        'user__email'
+    )
+
+
 admin.site.register(Ingredient, IngredientAdmin)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Recipe, RecipeAdmin)
-admin.site.register(Cart)
-admin.site.register(Favorite)
+admin.site.register(IngredientInRecipe, IngredientInRecipeAdmin)
+admin.site.register(FavoriteList, FavoriteListAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)
+admin.site.register(ShoppingCart, ShoppingCartAdmin)

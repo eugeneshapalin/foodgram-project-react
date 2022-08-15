@@ -8,6 +8,7 @@ Django==2.2.16
 django-csvimport==2.16
 django-cors-headers==3.9.0
 django-filter==21.1
+django-colorfield==0.7.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.8.0
 djoser==2.1.0

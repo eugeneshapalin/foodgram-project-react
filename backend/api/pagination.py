@@ -1,6 +1,7 @@
 from rest_framework.pagination import PageNumberPagination
 
+from foodgram_shapalin.settings import PAGES
 
-class LimitPageNumberPagination(PageNumberPagination):
-    page_size = 6
+class RecipePagination(PageNumberPagination):
+    page_size = PAGES
     page_size_query_param = 'limit'

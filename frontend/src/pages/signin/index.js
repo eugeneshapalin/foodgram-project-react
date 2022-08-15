@@ -6,10 +6,11 @@ import { Redirect } from 'react-router-dom'
 import { useContext } from 'react'
 import MetaTags from 'react-meta-tags'
 
+
 const SignIn = ({ onSignIn }) => {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation()
   const authContext = useContext(AuthContext)
-
+  
   return <Main>
     {authContext && <Redirect to='/recipes' />}
     <Container>
@@ -47,6 +48,7 @@ const SignIn = ({ onSignIn }) => {
         >
           Войти
         </Button>
+        
       </Form>
     </Container>
   </Main>

@@ -1,5 +1,8 @@
 from django.contrib import admin
+from users.models import User
 
-from users.models import Follow
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
 
-admin.site.register(Follow)
+    list_dispaly = ('__all__',)
+    search_fields = ('email', 'username')
