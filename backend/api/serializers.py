@@ -189,8 +189,6 @@ class RecipeSerializer(serializers.ModelSerializer):
                 'Не переданы ингредиенты.'
             )
 
-        ingredients = data.get('ingredientinrecipe')
-        ingredient_list = []
         return data
 
 

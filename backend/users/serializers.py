@@ -1,6 +1,5 @@
 from djoser.serializers import UserSerializer
 from rest_framework import serializers
-
 from api.models import Subscription
 from users.models import User
 
