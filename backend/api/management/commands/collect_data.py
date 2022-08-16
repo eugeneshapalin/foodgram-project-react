@@ -3,8 +3,6 @@ import os
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from api.models import Ingredient, Tag
-from users.models import User
-
 
 DATA_ROOT = os.path.join(settings.BASE_DIR, 'data')
 
@@ -47,15 +45,3 @@ class Command(BaseCommand):
         except FileNotFoundError:
             raise CommandError('Ошибка в добавлении тегов')
         self.stdout.write('Теги добавленны в базу данных')
-        # try:
-        #     User.objects.get_or_create(
-        #         username='test',
-        #         email='test@mail.com',
-        #         password='pbkdf2_sha256$150000$04dIcOWi9tFx$RIuSYggPvu/sxyGR2yBTpxj5FkNhuj7upAlMY/UTiPM=',
-        #         #Qwerty12345678!
-        #         first_name='test_name',
-        #         last_name='test_lastname',
-        #         )
-        # except FileNotFoundError:
-        #     raise CommandError('Ошибка в добавлении пользователя')
-        # self.stdout.write('Тестовый пользователь добавлен в базу данных')

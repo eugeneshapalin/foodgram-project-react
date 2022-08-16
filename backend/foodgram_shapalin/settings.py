@@ -153,8 +153,6 @@ REST_FRAMEWORK = {
 
 
 DJOSER = {
-    #'USER_ID_FIELD': 'id',
-    #'LOGIN_FIELD': 'username',
     'SERIALIZERS': {
         'user_create': 'users.serializers.CreateCustomUserSerializer',
         'user': 'users.serializers.CurrentCustomUserSerializer',
@@ -168,6 +166,3 @@ DJOSER = {
 }
 
 PAGES = 6
-# COOKING_TIME_RECIPE = 1
-# AMOUNT_INGREDIENT = 1
-#FILE = 'shopping_list'
