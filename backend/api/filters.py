@@ -1,7 +1,7 @@
 from django_filters import rest_framework as filter
-
 from api.models import Ingredient, Recipe, Tag
 from users.models import User
+
 
 class IngredientFilter(filter.FilterSet):
     name = filter.CharFilter(lookup_expr='istartswith')

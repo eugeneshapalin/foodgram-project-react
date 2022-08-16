@@ -5,6 +5,7 @@ USER = 'user'
 MODERATOR = 'moderator'
 ADMIN = 'admin'
 
+
 class User(AbstractUser):
     ROLES = (
         (USER, USER),
@@ -18,7 +19,7 @@ class User(AbstractUser):
                               unique=True,
                               )
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username','password','first_name','last_name']
+    REQUIRED_FIELDS = ['username', 'password', 'first_name', 'last_name']
 
     class Meta:
         verbose_name = 'пользователь'
@@ -37,4 +38,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-

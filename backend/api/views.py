@@ -12,10 +12,10 @@ from api.filters import IngredientFilter, TagsFilter
 from api.pagination import RecipePagination
 from api.permissions import AuthorOrReadOnly
 from api.serializers import (IngredientSerializer, RecipeSerializer,
-                          SubscribeSerializer, SubscribtionSerializer,
-                          SubscriptionRecipesSerializer, TagSerializer)
+                             SubscribeSerializer, SubscribtionSerializer,
+                             SubscriptionRecipesSerializer, TagSerializer)
 from api.models import (FavoriteList, Ingredient, IngredientInRecipe,
-                            Recipe, ShoppingCart, Subscription, Tag)
+                        Recipe, ShoppingCart, Subscription, Tag)
 from users.models import User
 
 
@@ -93,8 +93,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         response = HttpResponse(content, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename={0}'
         return response
-
-
 
     def add_recipe(self, model, request, pk):
         recipe = get_object_or_404(Recipe, id=pk)

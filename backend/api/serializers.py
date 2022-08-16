@@ -5,8 +5,8 @@ from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 from api.models import (FavoriteList, Ingredient,
-                            IngredientInRecipe, Recipe, ShoppingCart,
-                            Subscription, Tag)
+                        IngredientInRecipe, Recipe, ShoppingCart,
+                        Subscription, Tag)
 from users.models import User
 from users.serializers import CurrentCustomUserSerializer
 
@@ -38,10 +38,10 @@ class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
         fields = ('id', 'name', 'unit')
-    
+
     def create(self, validated_data):
         return Ingredient.objects.create(**validated_data)
-        
+
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.unit = validated_data.get(

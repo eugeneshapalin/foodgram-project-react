@@ -1,12 +1,13 @@
 from django.contrib import admin
-
 from api.models import (FavoriteList, Ingredient,
-                            IngredientInRecipe, Recipe,
-                            ShoppingCart, Subscription, Tag)
+                        IngredientInRecipe, Recipe,
+                        ShoppingCart, Subscription, Tag)
+
 
 class IngredientInRecipeInline(admin.TabularInline):
     model = IngredientInRecipe
     extra = 1
+
 
 class IngredientInRecipeAdmin(admin.ModelAdmin):
     list_display = (
