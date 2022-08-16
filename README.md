@@ -1,3 +1,6 @@
+
+![example workflow](https://github.com/eugeneshapalin/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+
 # praktikum_new_diplom
 
 
