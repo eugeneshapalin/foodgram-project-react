@@ -274,5 +274,5 @@ class SubscribeSerializer(serializers.ModelSerializer):
     def validate_author(self, value):
         if self.context.get('request').user == value:
             raise serializers.ValidationError(
-                'Вы не можете подписаться на самого себя!')
+                'Вы не можете подписаться на самого себя')
         return value
