@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2 
         with:
           push: true
-          tags: tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-project-react:latest 
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-project-react:latest 
 
   deploy:
     runs-on: ubuntu-latest
