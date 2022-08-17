@@ -26,7 +26,9 @@ services:
 
   frontend:
     #image: yevgeniyshapalin/foodgram_frontend
-    context: ../frontend
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     depends_on:
       - backend
     volumes:
