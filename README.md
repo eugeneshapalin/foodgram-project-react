@@ -47,13 +47,13 @@ https://github.com/eugeneshapalin/foodgram-project-react
 sudo docker-compose up -d --build
 
 * После успешной сборки на сервере выполните команды:
-    sudo docker-compose exec backend python manage.py makemigrations
-    sudo docker-compose exec backend python manage.py migrate
-    sudo docker-compose exec backend python manage.py makemigrations api
-    sudo docker-compose exec backend python manage.py migrate api
-    sudo docker-compose exec backend python manage.py collectstatic --noinput
-    sudo docker-compose exec backend python manage.py collect_data
-    sudo docker-compose exec backend python manage.py createsuperuser
+    sudo docker-compose exec backend python manage.py makemigrations <br>
+    sudo docker-compose exec backend python manage.py migrate <br>
+    sudo docker-compose exec backend python manage.py makemigrations api <br>
+    sudo docker-compose exec backend python manage.py migrate api <br>
+    sudo docker-compose exec backend python manage.py collectstatic --noinput <br>
+    sudo docker-compose exec backend python manage.py collect_data <br>
+    sudo docker-compose exec backend python manage.py createsuperuser <br> 
 
     - Проект будет доступен по вашему IP
 
