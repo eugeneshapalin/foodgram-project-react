@@ -18,7 +18,7 @@ https://github.com/eugeneshapalin/foodgram-project-react
     POSTGRES_PASSWORD=postgres<br>
     DB_HOST=db<br>
     DB_PORT=5432<br>
-    SECRET_KEY=<секретный ключ проекта django><br>
+    SECRET_KEY=секретный ключ проекта django<br>
 
 * Для работы с Workflow добавьте в Secrets GitHub переменные окружения для работы:<br>
     
