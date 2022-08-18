@@ -1,6 +1,8 @@
 from colorfield.fields import ColorField
 from django.db import models
 from users.models import User
+from django.core import validators
+from foodgram_shapalin.settings import MIN_TIME,MAX_TIME
 
 
 class Tag(models.Model):
@@ -21,6 +23,7 @@ class Tag(models.Model):
 
     class Meta:
         verbose_name = 'тег'
+        verbose_name_plural = 'теги'
 
     def __str__(self):
         return self.name
@@ -29,7 +32,7 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(
         max_length=100,
-        verbose_name='название ингредиентаd',
+        verbose_name='название ингредиента',
     )
     measurement_unit = models.CharField(
         max_length=100,
@@ -38,6 +41,7 @@ class Ingredient(models.Model):
 
     class Meta:
         verbose_name = 'ингредиент'
+        verbose_name_plural = 'ингредиенты'
 
     def __str__(self):
         return f'{self.name}, {self.measurement_unit}'
@@ -48,7 +52,6 @@ class Recipe(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='recipes',
-        max_length=100,
         verbose_name='автор'
     )
     name = models.CharField(
@@ -77,6 +80,11 @@ class Recipe(models.Model):
     )
     time = models.PositiveSmallIntegerField(
         default=1,
+        validators=(
+            validators.MinValueValidator(
+                MIN_TIME, message='минимальное время приготовления 1 минута'),
+            validators.MaxValueValidator(
+                MAX_TIME, message='максимальное время приготовления 24 часа'),),
         verbose_name='время приготовления',
     )
     pub_date = models.DateTimeField(
@@ -87,6 +95,7 @@ class Recipe(models.Model):
 
     class Meta:
         verbose_name = 'рецепт'
+        verbose_name_plural = 'рецепты'
         ordering = ('-pub_date',)
         constraints = (
             models.UniqueConstraint(
@@ -114,10 +123,16 @@ class IngredientInRecipe(models.Model):
     )
     amount = models.PositiveSmallIntegerField(
         default=1,
+        validators=(
+            validators.MinValueValidator(
+                MIN_TIME, message='минимальное количество ингредиентов - 1'),
+            validators.MaxValueValidator(
+                MAX_TIME, message='превышено максимальное количество ингредиентов'),),
     )
 
     class Meta:
         verbose_name = 'ингредиент в рецепте'
+        verbose_name_plural = 'ингредиенты в рецепте'
         constraints = (
             models.UniqueConstraint(
                 fields=('ingredient', 'recipe'),
@@ -144,10 +159,13 @@ class Subscription(models.Model):
         related_name='following',
         verbose_name='автор'
     )
-
+    
     class Meta:
         verbose_name = 'подписка'
         constraints = (
+            models.CheckConstraint(
+                check=models.Q(User.username != Recipe.author),
+                name='невозможно подписаться на самого себя',),
             models.UniqueConstraint(
                 fields=('user', 'author'),
                 name='unique_follow'
@@ -177,6 +195,7 @@ class FavoriteList(models.Model):
 
     class Meta:
         verbose_name = 'список избранного'
+        verbose_name_plural = 'списки избранного'
         constraints = (
             models.UniqueConstraint(
                 fields=('user', 'recipe'),

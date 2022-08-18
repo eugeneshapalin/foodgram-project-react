@@ -21,10 +21,10 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wlq(7*#wb*kqzz)^b2l(zvf=oh9*tlqz9mr=jkz3t2vx!3qlcl'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -165,4 +165,7 @@ DJOSER = {
     }
 }
 
+FILE = 'shopping-list'
 PAGES = 6
+MIN_TIME = 1
+MAX_TIME = 1440

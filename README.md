@@ -18,6 +18,7 @@ https://github.com/eugeneshapalin/foodgram-project-react
     POSTGRES_PASSWORD=postgres
     DB_HOST=db
     DB_PORT=5432
+    SECRET_KEY=<секретный ключ проекта django>
 
 * Для работы с Workflow добавьте в Secrets GitHub переменные окружения для работы:
     
@@ -46,7 +47,7 @@ https://github.com/eugeneshapalin/foodgram-project-react
 
 sudo docker-compose up -d --build
 
-* После успешной сборки на сервере выполните команды:
+* После успешной сборки на сервере выполните команды:<br>
     sudo docker-compose exec backend python manage.py makemigrations <br>
     sudo docker-compose exec backend python manage.py migrate <br>
     sudo docker-compose exec backend python manage.py makemigrations api <br>

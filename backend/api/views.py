@@ -16,7 +16,8 @@ from api.serializers import (IngredientSerializer, RecipeSerializer,
 from api.models import (FavoriteList, Ingredient, IngredientInRecipe,
                         Recipe, ShoppingCart, Subscription, Tag)
 from users.models import User
-
+from foodgram_shapalin.settings import FILE
+content_type='text/plain'
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ingredient.objects.all()
@@ -84,13 +85,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         line = ''
         for item in result:
-            a = item['ingredient__name']
-            b = item['ingredient_total']
-            line = line + str(a) + ' ' + str(b) + ' \n'
+            line = line + f"{str(item['ingredient__name'])} {str(item['ingredient_total'])} \n"
 
         content = line
-        response = HttpResponse(content, content_type='text/plain')
-        response['Content-Disposition'] = 'attachment; filename={0}'
+        response = HttpResponse(content, content_type)
+        response['Content-Disposition'] = f'filename={FILE}'
         return response
 
     def add_recipe(self, model, request, pk):

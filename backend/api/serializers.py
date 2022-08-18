@@ -9,6 +9,7 @@ from api.models import (FavoriteList, Ingredient,
                         Subscription, Tag)
 from users.models import User
 from users.serializers import CurrentCustomUserSerializer
+from foodgram_shapalin.settings import MIN_TIME,MAX_TIME
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -37,16 +38,16 @@ class AuthorSerializer(serializers.ModelSerializer):
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ('id', 'name', 'unit')
+        fields = ('id', 'name', 'measurement_unit')
 
     def create(self, validated_data):
         return Ingredient.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
-        instance.unit = validated_data.get(
-            'unit',
-            instance.unit
+        instance.measurement_unit = validated_data.get(
+            'measurement_unit',
+            instance.measurement_unit
         )
         instance.save()
         return instance
@@ -58,14 +59,14 @@ class IngredientSerializer(serializers.ModelSerializer):
 class IngredientInRecipeSerializer(serializers.ModelSerializer):
     id = IngredientSerializer()
     name = serializers.CharField(required=False)
-    unit = serializers.CharField(required=False)
+    measurement_unit = serializers.CharField(required=False)
     amount = serializers.IntegerField(
         validators=(MinValueValidator(1),)
     )
 
     class Meta:
         model = IngredientInRecipe
-        fields = ('id', 'name', 'amount', 'unit')
+        fields = ('id', 'name', 'amount', 'measurement_unit')
 
     def to_representation(self, instance):
         data = IngredientSerializer(instance.ingredient).data
@@ -107,7 +108,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     )
     image = Base64ImageField(required=False)
     time = serializers.IntegerField(
-        validators=(MinValueValidator(1),)
+        validators=(MinValueValidator(MIN_TIME),)
     )
 
     class Meta:
@@ -188,7 +189,17 @@ class RecipeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Не переданы ингредиенты.'
             )
-
+        ingredients = data.get('ingredientinrecipe')
+        ingredient_list = []
+        for ingredient in ingredients:
+            ingredient_item = get_object_or_404(
+                Ingredient, id=ingredient['id']
+            )
+            if ingredient_item in ingredient_list:
+                raise serializers.ValidationError(
+                    'такой ингредиент уже в списке'
+                )
+            ingredient_list.append(ingredient_item)
         return data
 
 
