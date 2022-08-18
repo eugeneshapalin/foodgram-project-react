@@ -10,37 +10,37 @@
 
 https://github.com/eugeneshapalin/foodgram-project-react
 
-* В директории infra необходимо создать .env файл с данными:
+* В директории infra необходимо создать .env файл с данными:<br>
     
-    DB_ENGINE=django.db.backends.postgresql
-    DB_NAME=postgres
-    POSTGRES_USER=postgres
-    POSTGRES_PASSWORD=postgres
-    DB_HOST=db
-    DB_PORT=5432
-    SECRET_KEY=<секретный ключ проекта django>
+    DB_ENGINE=django.db.backends.postgresql<br>
+    DB_NAME=postgres<br>
+    POSTGRES_USER=postgres<br>
+    POSTGRES_PASSWORD=postgres<br>
+    DB_HOST=db<br>
+    DB_PORT=5432<br>
+    SECRET_KEY=<секретный ключ проекта django><br>
 
-* Для работы с Workflow добавьте в Secrets GitHub переменные окружения для работы:
+* Для работы с Workflow добавьте в Secrets GitHub переменные окружения для работы:<br>
     
-    DB_ENGINE=django.db.backends.postgresql
-    DB_NAME=postgres
-    POSTGRES_USER=postgres
-    POSTGRES_PASSWORD=postgres
-    DB_HOST=db
-    DB_PORT=5432
+    DB_ENGINE=django.db.backends.postgresql<br>
+    DB_NAME=postgres<br>
+    POSTGRES_USER=postgres<br>
+    POSTGRES_PASSWORD=postgres<br>
+    DB_HOST=db<br>
+    DB_PORT=5432<br>
     
-    DOCKER_PASSWORD=пароль от DockerHub
-    DOCKER_USERNAME=имя пользователя
+    DOCKER_PASSWORD=пароль от DockerHub<br>
+    DOCKER_USERNAME=имя пользователя<br>
 
-    USER=username для подключения к серверу
-    HOST=ip сервера
-    PASSPHRASE=< для сервера, если он установлен
-    SSH_KEY=ваш SSH ключ (для получения: cat ~/.ssh/id_rsa)
+    USER=username для подключения к серверу<br>
+    HOST=ip сервера<br>
+    PASSPHRASE=< для сервера, если он установлен<br>
+    SSH_KEY=ваш SSH ключ (для получения: cat ~/.ssh/id_rsa)<br>
 
-    Workflow состоит из трёх шагов:
-     - Проверка кода на соответствие PEP8
-     - Сборка и публикация образа бекенда на DockerHub.
-     - Автоматический деплой на удаленный сервер.
+    Workflow состоит из трёх шагов:<br>
+     - Проверка кода на соответствие PEP8<br>
+     - Сборка и публикация образа бекенда на DockerHub.<br>
+     - Автоматический деплой на удаленный сервер.<br>
 
 
 * На сервере соберите docker-compose:
