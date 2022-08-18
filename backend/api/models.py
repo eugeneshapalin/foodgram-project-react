@@ -2,7 +2,7 @@ from colorfield.fields import ColorField
 from django.db import models
 from users.models import User
 from django.core import validators
-from foodgram_shapalin.settings import MIN_TIME,MAX_TIME
+from foodgram_shapalin.settings import MIN_TIME, MAX_TIME
 
 
 class Tag(models.Model):
@@ -82,9 +82,11 @@ class Recipe(models.Model):
         default=1,
         validators=(
             validators.MinValueValidator(
-                MIN_TIME, message='минимальное время приготовления 1 минута'),
+                MIN_TIME,
+                message='минимальное время приготовления 1 минута'),
             validators.MaxValueValidator(
-                MAX_TIME, message='максимальное время приготовления 24 часа'),),
+                MAX_TIME,
+                message='максимальное время приготовления 24 часа'),),
         verbose_name='время приготовления',
     )
     pub_date = models.DateTimeField(
@@ -125,9 +127,11 @@ class IngredientInRecipe(models.Model):
         default=1,
         validators=(
             validators.MinValueValidator(
-                MIN_TIME, message='минимальное количество ингредиентов - 1'),
+                MIN_TIME,
+                message='минимальное количество ингредиентов - 1'),
             validators.MaxValueValidator(
-                MAX_TIME, message='превышено максимальное количество ингредиентов'),),
+                MAX_TIME,
+                message='превышено максимальное количество ингредиентов'),),
     )
 
     class Meta:
@@ -159,7 +163,7 @@ class Subscription(models.Model):
         related_name='following',
         verbose_name='автор'
     )
-    
+
     class Meta:
         verbose_name = 'подписка'
         constraints = (

@@ -9,7 +9,7 @@ from api.models import (FavoriteList, Ingredient,
                         Subscription, Tag)
 from users.models import User
 from users.serializers import CurrentCustomUserSerializer
-from foodgram_shapalin.settings import MIN_TIME,MAX_TIME
+from foodgram_shapalin.settings import MIN_TIME
 
 
 class AuthorSerializer(serializers.ModelSerializer):

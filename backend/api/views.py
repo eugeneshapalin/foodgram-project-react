@@ -17,7 +17,8 @@ from api.models import (FavoriteList, Ingredient, IngredientInRecipe,
                         Recipe, ShoppingCart, Subscription, Tag)
 from users.models import User
 from foodgram_shapalin.settings import FILE
-content_type='text/plain'
+content_type = 'text/plain'
+
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ingredient.objects.all()
@@ -85,7 +86,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         line = ''
         for item in result:
-            line = line + f"{str(item['ingredient__name'])} {str(item['ingredient_total'])} \n"
+            line = line + f"{str(item['ingredient__name'])} \
+                    {str(item['ingredient_total'])} \n"
 
         content = line
         response = HttpResponse(content, content_type)
