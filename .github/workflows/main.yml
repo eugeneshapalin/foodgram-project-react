@@ -50,19 +50,20 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-project:latest
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build_and_push_to_docker_hub
-  #   steps:
-  #     - name: executing remote ssh commands to deploy
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.HOST }}
-  #         username: ${{ secrets.USER }}
-  #         passphrase: ${{ secrets.PASSPHRASE }}
-  #         key: ${{ secrets.SSH_KEY }}
-  #         script: |
-  #             touch 111
+  deploy:
+    if: github.ref == 'master'
+    runs-on: ubuntu-latest
+    needs: build_and_push_to_docker_hub
+    steps:
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+              touch 111
   #           cd foodgram-project-react/infra/
   #           docker-compose stop
   #           docker-compose rm web
