@@ -2,7 +2,7 @@ from colorfield.fields import ColorField
 from django.db import models
 from users.models import User
 from django.core import validators
-from foodgram_shapalin.settings import MIN_TIME, MAX_TIME
+from foodgram_shapalin.settings import MIN_TIME, MAX_TIME, MIN_INGR, MAX_INGR
 
 
 class Tag(models.Model):
@@ -78,15 +78,15 @@ class Recipe(models.Model):
         related_name='recipes',
         verbose_name='тег',
     )
-    time = models.PositiveSmallIntegerField(
+    cooking_time = models.PositiveSmallIntegerField(
         default=1,
         validators=(
             validators.MinValueValidator(
                 MIN_TIME,
-                message='минимальное время приготовления 1 минута'),
+                message='минимальное время приготовления {MIN_TIME} минута'),
             validators.MaxValueValidator(
                 MAX_TIME,
-                message='максимальное время приготовления 24 часа'),),
+                message='максимальное время приготовления {MAX_TIME} часа'),),
         verbose_name='время приготовления',
     )
     pub_date = models.DateTimeField(
@@ -127,10 +127,10 @@ class IngredientInRecipe(models.Model):
         default=1,
         validators=(
             validators.MinValueValidator(
-                MIN_TIME,
-                message='минимальное количество ингредиентов - 1'),
+                MIN_INGR,
+                message='минимальное количество ингредиентов - {MIN_INGR}'),
             validators.MaxValueValidator(
-                MAX_TIME,
+                MAX_INGR,
                 message='превышено максимальное количество ингредиентов'),),
     )
 
@@ -166,10 +166,12 @@ class Subscription(models.Model):
 
     class Meta:
         verbose_name = 'подписка'
+        verbose_name_plural = 'подписки'
         constraints = (
             models.CheckConstraint(
-                check=models.Q(User.username != Recipe.author),
-                name='невозможно подписаться на самого себя',),
+                check=~models.Q(user=models.F('author')),
+                name='невозможно подписаться на самого себя',
+            ),
             models.UniqueConstraint(
                 fields=('user', 'author'),
                 name='unique_follow'

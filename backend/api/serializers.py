@@ -107,7 +107,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         method_name='get_is_in_shopping_cart'
     )
     image = Base64ImageField(required=False)
-    time = serializers.IntegerField(
+    cooking_time = serializers.IntegerField(
         validators=(MinValueValidator(MIN_TIME),)
     )
 
@@ -122,7 +122,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                   'name',
                   'image',
                   'text',
-                  'time'
+                  'cooking_time'
                   )
         validators = (
             UniqueTogetherValidator(
@@ -189,17 +189,17 @@ class RecipeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Не переданы ингредиенты.'
             )
-        ingredients = data.get('ingredientinrecipe')
+
+        ingredients = self.initial_data.get('ingredients')
         ingredient_list = []
-        for ingredient in ingredients:
-            ingredient_item = get_object_or_404(
-                Ingredient, id=ingredient['id']
-            )
-            if ingredient_item in ingredient_list:
+        for ingredient_item in ingredients:
+            ingredient = get_object_or_404(Ingredient,
+                                           id=ingredient_item['id'])
+            if ingredient in ingredient_list:
                 raise serializers.ValidationError(
                     'такой ингредиент уже в списке'
-                )
-            ingredient_list.append(ingredient_item)
+                    )
+
         return data
 
 
@@ -209,7 +209,7 @@ class SubscriptionRecipesSerializer(RecipeSerializer):
         fields = ('id',
                   'name',
                   'image',
-                  'time'
+                  'cooking_time'
                   )
 
 
@@ -283,5 +283,5 @@ class SubscribeSerializer(serializers.ModelSerializer):
     def validate_author(self, value):
         if self.context.get('request').user == value:
             raise serializers.ValidationError(
-                'Вы не можете подписаться на самого себя')
+                'вы не можете подписаться на самого себя')
         return value

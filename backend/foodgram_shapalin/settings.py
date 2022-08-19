@@ -169,3 +169,5 @@ FILE = 'shopping-list'
 PAGES = 6
 MIN_TIME = 1
 MAX_TIME = 1440
+MIN_INGR = 1
+MAX_INGR = 100
