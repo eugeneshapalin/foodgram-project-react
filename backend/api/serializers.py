@@ -196,9 +196,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             ingredient = get_object_or_404(Ingredient,
                                            id=ingredient_item['id'])
             if ingredient in ingredient_list:
-                raise serializers.ValidationError(
-                    'такой ингредиент уже в списке'
-                    )
+                raise serializers.ValidationError('ингредиент уже в списке')
 
         return data
 
