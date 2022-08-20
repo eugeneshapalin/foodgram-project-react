@@ -11,15 +11,13 @@ class IngredientInRecipeInline(admin.TabularInline):
 
 class IngredientInRecipeAdmin(admin.ModelAdmin):
     list_display = (
-        'author',
         'recipe',
         'ingredient',
         'amount'
     )
-    list_display_links = ('author', 'recipe',)
+    list_display_links = ('recipe',)
     search_fields = ('recipe__name',
-                     'author__username',
-                     'author__email')
+                     'recipe__author',)
     list_filter = ('recipe__tags',)
 
 
