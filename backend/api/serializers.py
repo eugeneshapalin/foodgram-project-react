@@ -201,11 +201,11 @@ class RecipeSerializer(serializers.ModelSerializer):
         ingredient_list = []
         for ingredient in ingredients:
             ingredient_item = get_object_or_404(
-                Ingredient, id=ingredient['id']
+                Ingredient, id=ingredient_item['id']
             )
             if ingredient_item in ingredient_list:
                 raise serializers.ValidationError(
-                    'Такой ингредиент уже выбран'
+                    'ингредиент уже в списке'
                 )
             ingredient_list.append(ingredient_item)
         return data
