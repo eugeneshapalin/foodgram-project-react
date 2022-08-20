@@ -15,7 +15,7 @@ class IngredientInRecipeAdmin(admin.ModelAdmin):
         'ingredient',
         'amount'
     )
-    list_display_links = ('author','recipe',)
+    list_display_links = ('author', 'recipe',)
     search_fields = ('recipe__name',
                      'author__username',
                      'author__email')
