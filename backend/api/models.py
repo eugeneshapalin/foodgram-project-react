@@ -83,10 +83,10 @@ class Recipe(models.Model):
         validators=(
             validators.MinValueValidator(
                 MIN_TIME,
-                message='минимальное время приготовления {MIN_TIME} минута'),
+                message=f'минимальное время приготовления {MIN_TIME} минута'),
             validators.MaxValueValidator(
                 MAX_TIME,
-                message='максимальное время приготовления {MAX_TIME} часа'),),
+                message=f'максимальное время приготовления {MAX_TIME} часа'),),
         verbose_name='время приготовления',
     )
     pub_date = models.DateTimeField(
@@ -128,10 +128,10 @@ class IngredientInRecipe(models.Model):
         validators=(
             validators.MinValueValidator(
                 MIN_INGR,
-                message='минимальное количество ингредиентов - {MIN_INGR}'),
+                message=f'минимальное количество ингредиентов - {MIN_INGR}'),
             validators.MaxValueValidator(
                 MAX_INGR,
-                message='превышено максимальное количество ингредиентов'),),
+                message=f'превышено максимальное количество ингредиентов'),),
     )
 
     class Meta:
