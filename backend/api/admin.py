@@ -17,7 +17,7 @@ class IngredientInRecipeAdmin(admin.ModelAdmin):
     )
     list_display_links = ('recipe',)
     search_fields = ('recipe__name', 'ingredient__name', 'recipe__author')
-    list_filter = ('recipe__tags')
+    list_filter = ('recipe__tags',)
 
 
 class IngredientAdmin(admin.ModelAdmin):
@@ -38,7 +38,7 @@ class IngredientAdmin(admin.ModelAdmin):
 class RecipeAdmin(admin.ModelAdmin):
     inlines = (IngredientInRecipeInline,)
     list_display = ('author', 'name', 'count_favorite')
-    list_filter = ('tags')
+    list_filter = ('tags',)
     search_fields = ('name',
                      'author__username',
                      'author__email')
@@ -71,7 +71,7 @@ class ShoppingCartAdmin(admin.ModelAdmin):
         'user__email',
         'recipe__name'
     )
-    list_filter = ('recipe__tags')
+    list_filter = ('recipe__tags',)
 
 
 class SubscriptionAdmin(admin.ModelAdmin):
