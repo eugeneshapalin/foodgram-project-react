@@ -86,9 +86,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         line = ''
         for item in result:
-            line = line + f"{str(item['ingredient__name'])} \
-                    {str(item['ingredient_total'])} \
-                    {str(item['ingredient_measurement_unit'])}\n"
+            # line = line + f"{str(item['ingredient__name'])} \
+            #         {str(item['ingredient_total'])} \
+            #         {str(item['ingredient_measurement_unit'])}\n"
+            line = line + f"{str(item)}"
 
         content = line
         response = HttpResponse(content, content_type)

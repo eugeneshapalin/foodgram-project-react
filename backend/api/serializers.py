@@ -197,17 +197,6 @@ class RecipeSerializer(serializers.ModelSerializer):
                                            id=ingredient_item['id'])
             if ingredient in ingredient_list:
                 raise serializers.ValidationError('ингредиент уже в списке')
-        # ingredients = data.get('ingredientinrecipe')
-        # ingredient_list = []
-        # for ingredient_item in ingredients:
-        #     ingredient = get_object_or_404(
-        #         Ingredient, id=ingredient_item['id']
-        #     )
-        #     if ingredient_item in ingredient_list:
-        #         raise serializers.ValidationError(
-        #             'ингредиент уже в списке'
-        #         )
-        #     ingredient_list.append(ingredient)
         return data
 
 
