@@ -48,7 +48,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-project:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram-project:v1
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,7 +64,7 @@ jobs:
               cd foodgram-project-react/infra/
               docker-compose stop
               docker-compose rm frontend
-              docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram-project
+              docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram-project:v1
               echo DB_ENGINE=${{ secrets.DB_ENGINE }} > .env
               echo DB_NAME=${{ secrets.DB_NAME }} >> .env
               echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
