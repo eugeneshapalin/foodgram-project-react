@@ -77,7 +77,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         result = IngredientInRecipe.objects.filter(
             recipe__shoppingcartrecipe__user=request.user
         ).values(
-            'ingredient__name'
+            'ingredient__name', 'ingredient__measurement_unit'
         ).order_by(
             'ingredient__name'
         ).annotate(
@@ -86,10 +86,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
         line = ''
         for item in result:
-            # line = line + f"{str(item['ingredient__name'])} \
-            #         {str(item['ingredient_total'])} \
-            #         {str(item['ingredient_measurement_unit'])}\n"
-            line = line + f"{str(item)}"
+            line = line + f"{str(item['ingredient__name'])} \
+                    {str(item['ingredient_total'])} \
+                    {str(item['ingredient__measurement_unit'])}\n"
+           
 
         content = line
         response = HttpResponse(content, content_type)
