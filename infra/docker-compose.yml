@@ -44,11 +44,11 @@ services:
       - ../docs/:/usr/share/nginx/html/api/docs/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
-
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
 volumes:
   static_value:
   media_value:
   db_value:
-  - ./data/certbot/conf:/etc/letsencrypt
-  - ./data/certbot/www:/var/www/certbot
+  
