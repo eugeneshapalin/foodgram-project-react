@@ -197,7 +197,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         #                                    id=ingredient_item['id'])
         #     if ingredient in ingredient_list:
         #         raise serializers.ValidationError('ингредиент уже в списке')
-        
+
         ingredients = data.get('ingredientinrecipe')
         ingredient_list = []
         for ingredient in ingredients:
