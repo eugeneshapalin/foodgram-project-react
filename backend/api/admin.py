@@ -11,6 +11,7 @@ class IngredientInRecipeInline(admin.TabularInline):
 
 class IngredientInRecipeAdmin(admin.ModelAdmin):
     list_display = (
+        'author',
         'recipe',
         'ingredient',
         'amount'
