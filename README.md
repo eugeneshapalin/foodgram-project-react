@@ -50,8 +50,6 @@ sudo docker-compose up -d --build
 * После успешной сборки на сервере выполните команды:<br>
     sudo docker-compose exec backend python manage.py makemigrations <br>
     sudo docker-compose exec backend python manage.py migrate <br>
-    sudo docker-compose exec backend python manage.py makemigrations api <br>
-    sudo docker-compose exec backend python manage.py migrate api <br>
     sudo docker-compose exec backend python manage.py collectstatic --noinput <br>
     sudo docker-compose exec backend python manage.py collect_data <br>
     sudo docker-compose exec backend python manage.py createsuperuser <br> 
