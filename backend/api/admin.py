@@ -23,7 +23,7 @@ class IngredientInRecipeAdmin(admin.ModelAdmin):
 class IngredientAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'measurement_unit')
     search_fields = ('name__istartswith', 'name__contains')
-    list_filter = ('measurement_unit')
+    list_filter = ('measurement_unit',)
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super(
@@ -61,7 +61,7 @@ class FavoriteListAdmin(admin.ModelAdmin):
         'user__email',
         'recipe__name'
     )
-    list_filter = ('recipe__tags')
+    list_filter = ('recipe__tags',)
 
 
 class ShoppingCartAdmin(admin.ModelAdmin):
