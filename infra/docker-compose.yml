@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
 
@@ -11,7 +11,7 @@ services:
       - ./.env
 
   backend:
-    image: yevgeniyshapalin/foodgram-project
+    image: yevgeniyshapalin/foodgram-project:latest
     expose:
       - 8000
     restart: always
@@ -24,7 +24,7 @@ services:
       - ./.env
 
   frontend:
-    image: yevgeniyshapalin/foodgram_frontend
+    image: yevgeniyshapalin/foodgram_frontend:latest
     depends_on:
       - backend
     volumes:
