@@ -11,8 +11,7 @@ services:
       - ./.env
 
   backend:
-    #image: yevgeniyshapalin/foodgram-project
-    build: ../backend
+    image: yevgeniyshapalin/foodgram-project
     expose:
       - 8000
     restart: always
@@ -25,10 +24,7 @@ services:
       - ./.env
 
   frontend:
-    #image: yevgeniyshapalin/foodgram_frontend
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: yevgeniyshapalin/foodgram_frontend
     depends_on:
       - backend
     volumes:
