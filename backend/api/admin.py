@@ -39,9 +39,9 @@ class RecipeAdmin(admin.ModelAdmin):
     inlines = (IngredientInRecipeInline,)
     list_display = ('author', 'name', 'count_favorite')
     list_filter = ('tags')
-    search_fields = ('name', 
-                    'author__username',
-                    'author__email')
+    search_fields = ('name',
+                     'author__username',
+                     'author__email')
 
     def count_favorite(self, obj):
         return FavoriteList.objects.filter(recipe=obj).count()
