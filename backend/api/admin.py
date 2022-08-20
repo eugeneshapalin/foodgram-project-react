@@ -16,12 +16,14 @@ class IngredientInRecipeAdmin(admin.ModelAdmin):
         'amount'
     )
     list_display_links = ('recipe',)
-    search_fields = ('recipe__name', 'ingredient__name')
+    search_fields = ('recipe__name', 'ingredient__name', 'recipe__author')
+    list_filter = ('recipe__tags')
 
 
 class IngredientAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'measurement_unit')
     search_fields = ('name__istartswith', 'name__contains')
+    list_filter = ('measurement_unit')
 
     def get_search_results(self, request, queryset, search_term):
         queryset, use_distinct = super(
@@ -36,8 +38,10 @@ class IngredientAdmin(admin.ModelAdmin):
 class RecipeAdmin(admin.ModelAdmin):
     inlines = (IngredientInRecipeInline,)
     list_display = ('author', 'name', 'count_favorite')
-    list_filter = ('author', 'tags')
-    search_fields = ('name', 'author__username')
+    list_filter = ('tags')
+    search_fields = ('name', 
+                    'author__username',
+                    'author__email')
 
     def count_favorite(self, obj):
         return FavoriteList.objects.filter(recipe=obj).count()
@@ -57,6 +61,7 @@ class FavoriteListAdmin(admin.ModelAdmin):
         'user__email',
         'recipe__name'
     )
+    list_filter = ('recipe__tags')
 
 
 class ShoppingCartAdmin(admin.ModelAdmin):
@@ -66,13 +71,16 @@ class ShoppingCartAdmin(admin.ModelAdmin):
         'user__email',
         'recipe__name'
     )
+    list_filter = ('recipe__tags')
 
 
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'author')
     search_fields = (
         'user__username',
-        'user__email'
+        'user__email',
+        'author__username',
+        'author__email'
     )
 
 
