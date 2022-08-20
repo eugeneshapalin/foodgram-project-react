@@ -131,7 +131,7 @@ class IngredientInRecipe(models.Model):
                 message=f'минимальное количество ингредиентов - {MIN_INGR}'),
             validators.MaxValueValidator(
                 MAX_INGR,
-                message=f'превышено максимальное количество {MAX_INGR} ингредиентов'),),
+                message=f'максимальное количество {MAX_INGR} ингредиентов'),),
     )
 
     class Meta:
