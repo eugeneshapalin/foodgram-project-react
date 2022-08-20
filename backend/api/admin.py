@@ -61,7 +61,7 @@ class FavoriteListAdmin(admin.ModelAdmin):
         'user__email',
         'recipe__name'
     )
-    list_filter = ('recipe__tags')
+    list_filter = ('tags')
 
 
 class ShoppingCartAdmin(admin.ModelAdmin):
